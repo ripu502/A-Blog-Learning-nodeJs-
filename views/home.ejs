@@ -1,19 +1,25 @@
 <%- include('include/head.ejs')%>
 
-<p>all the posts will come here</p>
-<% if (true) {%>
+<% if (details.length > 0) {%>
 <% for (let post of details) {%>
 <fieldset>
     <legend>
         <h2><%=post.heading%></h2>
     </legend>
-    <h3><%= post.postContent%></h3>
+    <h7><%= post.postContent%></h7>
     <br>
-    <h7> written by <%= post.name%></h7>
+    <p>
+        <hr>
+        <h3> written by <%= post.name%></h3>
+        <a href="/update<%=post._id%>">Update</a>
+        <a href="/delete<%=post._id%>">Delete</a>
+    </p>
 </fieldset>
 <br>
 <%}%> 
-<%}%>
+<%} else {%>
+    <h1>No Posts are Posted ...........</h1>
+    <%}%>
 
 </body>
 
