@@ -1,16 +1,30 @@
 const Post = require('../models/Post');
 
 module.exports.addPost = (req, res, next) => {
-    res.render('addPost');
+    res.render('addPost', {
+        title: "Add new Post"
+    });
 };
 
 module.exports.home = (req, res, next) => {
-    res.render('home');
+    Post.find()
+        .then((posts) => {
+            console.log(posts);
+            res.render('home', {
+                title: "Home",
+                details: posts
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 
 module.exports.error = (req, res, next) => {
-    res.render('error');
+    res.render('error', {
+        title: "Error"
+    });
 }
 
 module.exports.postingPost = (req, res, next) => {

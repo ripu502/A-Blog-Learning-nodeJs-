@@ -1,6 +1,20 @@
 <%- include('include/head.ejs')%>
 
-    <p>all the posts will come here</p>
+<p>all the posts will come here</p>
+<% if (true) {%>
+<% for (let post of details) {%>
+<fieldset>
+    <legend>
+        <h2><%=post.heading%></h2>
+    </legend>
+    <h3><%= post.postContent%></h3>
+    <br>
+    <h7> written by <%= post.name%></h7>
+</fieldset>
+<br>
+<%}%> 
+<%}%>
+
 </body>
 
 </html>
