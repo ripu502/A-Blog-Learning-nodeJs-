@@ -1,15 +1,12 @@
 const router = require('express').Router();
+const controller = require('../controller/function');
 
-router.get('/addPost', (req, res, next) => {
-    res.render('addPost');
-});
+router.get('/addPost', controller.addPost);
 
-router.get('/', (req, res, next) => {
-    res.render('home');
-});
+router.post('/postingPost', controller.postingPost);
 
-router.use('/', (req, res, next) => {
-    res.render('error');
-});
+router.get('/', controller.home);
+
+router.use('/', controller.error);
 
 module.exports = router;

@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add-Posts</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body>
-    <h1>WELCOME TO MY BLOG</h1>
-    <hr>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/addPost">Add-Posts</a></li>
-    </ul>
-    <hr>
+<%- include('include/head.ejs')%>
     <!-- <p>form for adding the post will come here</p> -->
-    <form action="/action_page.php">
+    <form action="/postingPost" method="post">
         <div class="row">
           <div class="col-25">
             <label for="name">Name</label>
