@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const keys = require('./config/keys');
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.set('views', 'views');
 
 app.use(router);
 
-mongoose.connect('mongodb+srv://ripudaman:ripudaman@cluster0-jywn3.mongodb.net/blog?retryWrites=true',  { useNewUrlParser: true }).then((result)=>{
+mongoose.connect(keys.mongoURI,  { useNewUrlParser: true }).then((result)=>{
     console.log('connected');
     app.listen(3000);
 }).catch((err)=>{
