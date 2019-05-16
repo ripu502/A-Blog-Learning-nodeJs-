@@ -1,48 +1,25 @@
 <%- include('include/head.ejs')%>
 <!-- <p>form for adding the post will come here</p> -->
-<form action="/updatingPost" method="post">
-    <div class="row">
-        <div class="col-25">
-            <label for="name">Name</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="name" name="name" placeholder="Your name.." value="<%= name%>">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-25">
-            <label for="heading">Heading</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="heading" name="heading" placeholder="Heading for post.." value="<%=heading%>">
-        </div>
-    </div>
-    <!-- <div class="row">
-          <div class="col-25">
-            <label for="country">Country</label>
-          </div>
-          <div class="col-75">
-            <select id="country" name="country">
-              <option value="australia">Australia</option>
-              <option value="canada">Canada</option>
-              <option value="usa">USA</option>
-            </select>
-          </div>
-        </div> -->
-    <div class="row">
-        <div class="col-25">
-            <label for="subject">Posts</label>
-        </div>
-        <div class="col-75">
-            <textarea id="subject" name="postContent" placeholder="Write something.."
-                style="height:200px"><%=postContent%></textarea>
-        </div>
-    </div>
-    <div class="row">
-            <input type="hidden"  name="updateId" value="<%= updateId%>"  />
-        <input type="submit" value="Update">
-    </div>
-</form>
+<div class="container jumbotron">
+
+    <form action="/updatingPost" method="post" class="form-group">
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name.." value="<%= name%>">
+
+        <label for="heading">Heading</label>
+        <input type="text" id="heading" name="heading" placeholder="Heading for post.." value="<%=heading%>">
+
+
+        <label for="subject">Posts</label>
+        <textarea id="subject" name="postContent" placeholder="Write something.."
+            style="height:200px"><%=postContent%></textarea>
+
+        <input type="hidden" name="updateId" value="<%= updateId%>" />
+        <button type="submit" value="Update" class="btn btn-outline-success">Update</button>
+
+    </form>
+</div>
 </body>
 
 </html>

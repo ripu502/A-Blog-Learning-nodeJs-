@@ -7,13 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> <%= title%> </title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-    <h1>WELCOME TO MY BLOG</h1>
-    <hr>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/addPost">Add-Posts</a></li>
-    </ul>
-    <hr>
+
+
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">WELCOME TO MY BLOG</a>
+        <form class="form-inline">
+                <a href="/" class = 'btn btn-outline-primary form-control mr-sm-2'>Home</a>
+                <a href="/addPost" class = 'btn btn-outline-primary my-2 my-sm-0'>Add-Posts</a>
+        </form>
+    </nav>
+    <br>

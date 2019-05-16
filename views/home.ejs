@@ -1,25 +1,33 @@
 <%- include('include/head.ejs')%>
-
 <% if (details.length > 0) {%>
 <% for (let post of details) {%>
-<fieldset>
-    <legend>
-        <h2><%=post.heading%></h2>
-    </legend>
-    <h7><%= post.postContent%></h7>
+<div class = 'container'>
+
+    <h3><%=post.heading%></h3>
     <br>
-    <p>
-        <hr>
-        <h3> written by <%= post.name%></h3>
-        <a href="/update<%=post._id%>">Update</a>
-        <a href="/delete<%=post._id%>">Delete</a>
-    </p>
-</fieldset>
+<h5><%= post.postContent%></h5>
 <br>
+<p>
+    <hr>
+    <h7> Written by <%= post.name%></h7>
+    <br>
+    <a href="/update<%=post._id%>" class="btn btn-outline-info">Update</a>
+    <a href="/delete<%=post._id%>" class="btn btn-outline-danger">Delete</a>
+</p>
+
+</div>
+<br>
+
 <%}%> 
 <%} else {%>
-    <h1>No Posts are Posted ...........</h1>
-    <%}%>
+<div class='container'>
+    <h4>No Posts are Posted ...........
+        <br>
+        <br>
+        <a href="/addPost" class = 'btn btn-outline-primary'>Go add new post</a>
+    </h4>
+</div>
+<%}%>
 
 </body>
 
