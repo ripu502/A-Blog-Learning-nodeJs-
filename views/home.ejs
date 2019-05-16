@@ -1,7 +1,7 @@
 <%- include('include/head.ejs')%>
 <% if (details.length > 0) {%>
 <% for (let post of details) {%>
-<div class='container'>
+<div class='container jumbotron'>
 
     <h3><%=post.heading%></h3>
     <br>
@@ -21,24 +21,8 @@
 <%}%> 
 
 
-
 <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav>
-
-
-
-<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
         <ul class="pagination pagination-sm">
             <% if (currentPage !== 1) {%>
 <li class="page-item"><a class="page-link" href="/?page=1">First</a></li>
@@ -48,7 +32,7 @@
 <%}%>
 
     <li class="page-item"><a class="page-link" href="/?page=<%=currentPage%>"
-style="background-color:mistyrose"><%= currentPage%></a></li>
+style="background-color:#F3F4F8"><%= currentPage%></a></li>
 <% if (hasNextPage) {%>
 <li class="page-item"><a class="page-link" href="/?page=<%=next%>">next</a></li>
 <%}%>
