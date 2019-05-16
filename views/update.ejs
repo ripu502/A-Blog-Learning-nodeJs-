@@ -4,16 +4,25 @@
 
     <form action="/updatingPost" method="post" class="form-group">
 
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name.." value="<%= name%>">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Your name.." value="<%= name%>">
+        </div>
 
-        <label for="heading">Heading</label>
-        <input type="text" id="heading" name="heading" placeholder="Heading for post.." value="<%=heading%>">
+
+        <div class="form-group">
+            <label for="heading">Heading</label>
+            <input type="text" class="form-control" id="heading" name="heading" placeholder="Heading for post.."
+                value="<%=heading%>">
+        </div>
 
 
-        <label for="subject">Posts</label>
-        <textarea id="subject" name="postContent" placeholder="Write something.."
-            style="height:200px"><%=postContent%></textarea>
+        <div class="form-group">
+            <label for="subject">Posts</label>
+            <textarea id="subject" name="postContent" class="form-control" placeholder="Write something.."
+                style="height:200px"><%=postContent%></textarea>
+        </div>
+
 
         <input type="hidden" name="updateId" value="<%= updateId%>" />
         <button type="submit" value="Update" class="btn btn-outline-success">Update</button>

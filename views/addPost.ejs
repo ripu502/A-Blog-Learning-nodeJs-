@@ -3,16 +3,26 @@
 <div class="container jumbotron">
 
   <form action="/postingPost" method="post" class="form-group">
+    <div class="form-group">
 
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" placeholder="Your name..">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Your name..">
 
+    </div>
 
-    <label for="heading">Heading</label>
-    <input type="text" id="heading" name="heading" placeholder="Heading for post..">
+    <div class="form-group">
 
-    <label for="subject">Posts</label>
-    <textarea id="subject" name="postContent" placeholder="Write something.." style="height:200px"></textarea>
+      <label for="heading">Heading</label>
+      <input type="text" class="form-control" id="heading" name="heading" placeholder="Heading for post..">
+
+    </div>
+
+    <div class="form-group">
+
+      <label for="subject">Posts</label>
+      <textarea id="subject" class="form-control" name="postContent" placeholder="Write something.." style="height:200px"></textarea>
+
+    </div>
 
     <button type="submit" value="Publish" class="btn btn-outline-success">Publish</button>
 </div>
