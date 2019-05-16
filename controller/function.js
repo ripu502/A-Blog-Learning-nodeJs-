@@ -1,4 +1,6 @@
 const Post = require('../models/Post');
+const maxItem = 2;
+let totalItem;
 
 module.exports.addPost = (req, res, next) => {
     res.render('addPost', {
@@ -7,16 +9,41 @@ module.exports.addPost = (req, res, next) => {
 };
 
 module.exports.home = (req, res, next) => {
-    Post.find()
-        .then((posts) => {
-            res.render('home', {
-                title: "Home",
-                details: posts
-            });
-        })
-        .catch((err) => {
-            console.log(err);
+    const page = +req.query.page || 1;
+
+    Post.find().countDocuments().then(result => {
+        totalItem = result;
+        return Post.find().skip((page - 1) * maxItem).limit(maxItem);
+    }).then(posts => {
+        // console.log(items);
+        res.render('home',
+            {
+                title: 'Home',
+                details: posts,
+                currentPage : page,
+                hasNextPage : totalItem > page*maxItem,
+                hasPreviousPage : page > 1,
+                previous : page -1,
+                next : page + 1,
+                lastPage : Math.ceil(totalItem/maxItem)
+            }
+        );
+    })
+        .catch(err => {
+            Console.log('error in the getting item getItem');
         });
+
+
+    // Post.find()
+    //     .then((posts) => {
+    //         res.render('home', {
+    //             title: "Home",
+    //             details: posts
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
 }
 
 
