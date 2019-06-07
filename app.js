@@ -26,7 +26,7 @@ app.use(router);
 
 mongoose.connect(`mongodb+srv://${process.env.MongoUser}:${process.env.MongoPassword}@cluster0-jywn3.mongodb.net/${process.env.MongoDataBase}?retryWrites=true`, { useNewUrlParser: true }).then((result) => {
     console.log('connected');
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.port || 3000);
 }).catch((err) => {
     console.log(err);
 });
