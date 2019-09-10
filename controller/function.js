@@ -1,12 +1,61 @@
 const Post = require('../models/Post');
+const Register = require('../models/Register');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
 const maxItem = 2;
 let totalItem;
 
 module.exports.addPost = (req, res, next) => {
     res.render('addPost', {
-        title: "Add new Post"
+        title: "Add new Post",
+        login: req.user,
     });
 };
+
+module.exports.signup = (req, res, next) => {
+    res.render('signup', {
+        title: "Register Yourself",
+        login: req.user,
+
+    });
+};
+
+module.exports.login = (req, res, next) => {
+    res.render('login', {
+        title: "Login Here",
+        login: req.user,
+    });
+};
+
+module.exports.register = (req, res, next) => {
+    const { name, email, password } = req.body;
+    bcrypt.hash(password, 12)
+        .then((hashPassword) => {
+            const user = new Register({ password: hashPassword, email: email, name: name });
+            return user.save();
+        }).then(() => {
+            console.log('user is saved');
+            res.redirect('/login');
+        })
+        .catch((err) => {
+            console.log(err);
+            res.redirect('/signup');
+        });
+}
+
+module.exports.postLogin = (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next);
+}
+
+module.exports.logout = (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/login');
+}
 
 module.exports.home = (req, res, next) => {
     const page = +req.query.page || 1;
@@ -20,12 +69,13 @@ module.exports.home = (req, res, next) => {
             {
                 title: 'Home',
                 details: posts,
-                currentPage : page,
-                hasNextPage : totalItem > page*maxItem,
-                hasPreviousPage : page > 1,
-                previous : page -1,
-                next : page + 1,
-                lastPage : Math.ceil(totalItem/maxItem)
+                currentPage: page,
+                hasNextPage: totalItem > page * maxItem,
+                hasPreviousPage: page > 1,
+                previous: page - 1,
+                next: page + 1,
+                lastPage: Math.ceil(totalItem / maxItem),
+                login: req.user,
             }
         );
     })
@@ -49,7 +99,8 @@ module.exports.home = (req, res, next) => {
 
 module.exports.error = (req, res, next) => {
     res.render('error', {
-        title: "Error"
+        title: "Error",
+        login: req.user,
     });
 }
 
@@ -93,7 +144,9 @@ module.exports.update = (req, res, next) => {
                 name: post.name,
                 heading: post.heading,
                 postContent: post.postContent,
-                updateId: post._id
+                updateId: post._id,
+                login: req.user,
+
             });
         })
         .catch((err) => {
@@ -109,9 +162,9 @@ module.exports.postUpdate = (req, res, next) => {
             post.name = req.body.name;
             post.heading = req.body.heading;
             post.postContent = req.body.postContent;
-            post.save().then((done)=>{
-                res.redirect('/');  
-            });       
+            post.save().then((done) => {
+                res.redirect('/');
+            });
         })
         .catch(err => {
             console.log(err);

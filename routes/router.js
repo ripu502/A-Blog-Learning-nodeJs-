@@ -1,17 +1,29 @@
 const router = require('express').Router();
 const controller = require('../controller/function');
+const { forwardAuthenticated } = require('../config/auth');
+const { ensureAuthenticated } = require('../config/auth');
 
-router.get('/addPost', controller.addPost);
+router.get('/addPost', ensureAuthenticated, controller.addPost);
 
-router.post('/postingPost', controller.postingPost);
+router.get('/logout', controller.logout);
 
-router.get('/', controller.home);
+router.get('/signup', forwardAuthenticated, controller.signup);
 
-router.get('/delete:deleteId', controller.delete);
+router.post('/register', forwardAuthenticated, controller.register);
 
-router.get('/update:updateId', controller.update);
+router.post('/login', forwardAuthenticated, controller.postLogin);
 
-router.post('/updatingPost', controller.postUpdate);
+router.get('/login', forwardAuthenticated, controller.login);
+
+router.post('/postingPost', ensureAuthenticated, controller.postingPost);
+
+router.get('/', ensureAuthenticated, controller.home);
+
+router.get('/delete:deleteId', ensureAuthenticated, controller.delete);
+
+router.get('/update:updateId', ensureAuthenticated, controller.update);
+
+router.post('/updatingPost', ensureAuthenticated, controller.postUpdate);
 
 router.use('/', controller.error);
 

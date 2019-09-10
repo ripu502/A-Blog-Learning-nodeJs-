@@ -17,8 +17,16 @@
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand">WELCOME TO MY BLOG</a>
         <form class="form-inline">
-                <a href="/" class = 'btn btn-outline-primary form-control mr-sm-2'>Home</a>
-                <a href="/addPost" class = 'btn btn-outline-primary my-2 my-sm-0'>Add-Posts</a>
+
+            <% if (!login) { %>
+            <!-- <a href="/signup" class='btn btn-outline-primary mr-sm-2'>SignUp</a> -->
+            <%} else { %>
+            <a href="/logout" class='btn btn-outline-primary mr-sm-2'>Logout</a>
+            <a href="/" class='btn btn-outline-primary form-control mr-sm-2'>Home</a>
+            <a href="/addPost" class='btn btn-outline-primary my-2 my-sm-0'>Add-Posts</a>
+            <%}%>
+            
+
         </form>
     </nav>
     <br>

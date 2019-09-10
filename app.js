@@ -8,6 +8,11 @@ const compression = require('compression');
 
 const port = process.env.PORT || 3000;
 
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
+require('./config/passport')(passport);
+
 const app = express();
 app.use(helmet());
 app.use(compression());
@@ -18,6 +23,17 @@ const router = require('./routes/router');
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
