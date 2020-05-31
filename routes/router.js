@@ -25,6 +25,8 @@ router.get('/update:updateId', ensureAuthenticated, controller.update);
 
 router.post('/updatingPost', ensureAuthenticated, controller.postUpdate);
 
+router.get('/MyPost', ensureAuthenticated, controller.myposts)
+
 router.use('/', controller.error);
 
 module.exports = router;

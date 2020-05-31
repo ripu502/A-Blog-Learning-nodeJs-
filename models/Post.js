@@ -18,6 +18,12 @@ const postSchema = new mongoose.Schema({
         // required: true,
         // unique: true,
         // lowercase: true,
+    },
+    publisherEmail: {
+        type: String,
+    },
+    readmore: {
+        type: String,
     }
 
 });

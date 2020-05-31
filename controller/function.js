@@ -27,6 +27,46 @@ module.exports.login = (req, res, next) => {
     });
 };
 
+module.exports.myposts = (req, res, next) => {
+    const page = +req.query.page || 1;
+    console.log(req.user.email);
+    Post.find({ publisherEmail: req.user.email }).countDocuments().then(result => {
+        totalItem = result;
+        return Post.find({ publisherEmail: req.user.email }).skip((page - 1) * maxItem).limit(maxItem);
+    }).then(posts => {
+        // console.log(items);
+        res.render('mypost',
+            {
+                title: 'My Posts',
+                details: posts,
+                currentPage: page,
+                hasNextPage: totalItem > page * maxItem,
+                hasPreviousPage: page > 1,
+                previous: page - 1,
+                next: page + 1,
+                lastPage: Math.ceil(totalItem / maxItem),
+                login: req.user,
+            }
+        );
+    })
+        .catch(err => {
+            Console.log('error in the getting item getItem');
+        });
+
+
+    // Post.find()
+    //     .then((posts) => {
+    //         res.render('home', {
+    //             title: "Home",
+    //             details: posts
+    //         });
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
+
+}
+
 module.exports.register = (req, res, next) => {
     const { name, email, password } = req.body;
     bcrypt.hash(password, 12)
@@ -108,10 +148,13 @@ module.exports.postingPost = (req, res, next) => {
     const name = req.body.name;
     const heading = req.body.heading;
     const postContent = req.body.postContent;
+    const publisherEmail = req.body.auther;
+    // console.log(req.body.auther);
     const post = new Post({
         name: name,
         heading: heading,
-        postContent: postContent
+        postContent: postContent,
+        publisherEmail: publisherEmail
     });
     post.save()
         .then(post => {

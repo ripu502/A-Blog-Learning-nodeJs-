@@ -12,8 +12,8 @@
         <h7> Written by <%= post.name%></h7> <br/>
         <h7> Email contact <%= post.publisherEmail%></h7>
         <br>
-        <!-- <a href="/update<%=post._id%>" class="btn btn-outline-info">Update</a> -->
-        <!-- <a href="/delete<%=post._id%>" class="btn btn-outline-danger">Delete</a> -->
+        <a href="/update<%=post._id%>" class="btn btn-outline-info">Update</a>
+        <a href="/delete<%=post._id%>" class="btn btn-outline-danger">Delete</a>
     </p>
 
 </div>
@@ -26,19 +26,19 @@
     <ul class="pagination justify-content-center">
         <ul class="pagination pagination-sm">
             <% if (currentPage !== 1) {%>
-<li class="page-item"><a class="page-link" href="/?page=1">First</a></li>
+<li class="page-item"><a class="page-link" href="/MyPost?page=1">First</a></li>
 <%}%>
             <% if (hasPreviousPage && previous !== 1) {%>
-<li class="page-item"><a class="page-link" href="/?page=<%=previous%>">previous</a></li>
+<li class="page-item"><a class="page-link" href="/MyPost?page=<%=previous%>">previous</a></li>
 <%}%>
 
-    <li class="page-item"><a class="page-link" href="/?page=<%=currentPage%>"
+    <li class="page-item"><a class="page-link" href="/MyPost?page=<%=currentPage%>"
 style="background-color:#F3F4F8"><%= currentPage%></a></li>
 <% if (hasNextPage) {%>
-<li class="page-item"><a class="page-link" href="/?page=<%=next%>">next</a></li>
+<li class="page-item"><a class="page-link" href="/MyPost?page=<%=next%>">next</a></li>
 <%}%>
 <% if (lastPage !== currentPage){%>
-<li class="page-item"><a class="page-link" href="/?page=<%= lastPage%>">Last</a></li>
+<li class="page-item"><a class="page-link" href="/MyPost?page=<%= lastPage%>">Last</a></li>
 <%}%>
 </ul>
 </nav>

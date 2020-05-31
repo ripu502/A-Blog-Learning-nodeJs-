@@ -1,0 +1,7 @@
+Read more in larger posts
+clear database
+flash messages
+unquie login
+update delete only the valid user
+Forgotten password
+search
