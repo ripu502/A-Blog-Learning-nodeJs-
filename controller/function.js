@@ -29,7 +29,7 @@ module.exports.login = (req, res, next) => {
 
 module.exports.myposts = (req, res, next) => {
     const page = +req.query.page || 1;
-    console.log(req.user.email);
+    console.log(`signed user is ${req.user.email} from myposts`);
     Post.find({ publisherEmail: req.user.email }).countDocuments().then(result => {
         totalItem = result;
         return Post.find({ publisherEmail: req.user.email }).skip((page - 1) * maxItem).limit(maxItem);
@@ -156,7 +156,7 @@ module.exports.postingPost = (req, res, next) => {
         heading: heading,
         postContent: postContent,
         publisherEmail: publisherEmail,
-        readmore : readmore
+        readmore: readmore
     });
     post.save()
         .then(post => {
@@ -171,13 +171,26 @@ module.exports.postingPost = (req, res, next) => {
 
 module.exports.delete = (req, res, next) => {
     const deleteId = req.params.deleteId;
-    Post.findByIdAndDelete(deleteId)
-        .then(result => {
-            res.redirect('/');
-        })
-        .catch(err => {
-            console.log(err);
-        });
+    Post.findOne({ _id: deleteId }).then(post => {
+        if (req.user.email != post.publisherEmail) {
+          console.log('nahi');
+            res.redirect('/MyPost');
+        } else {
+            Post.findByIdAndDelete(deleteId)
+                .then(result => {
+                    res.redirect('/MyPost');
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.redirect('/MyPost');
+                });
+        }
+    }).catch(err => {
+        console.log(err);
+        res.redirect('/MyPost');
+        return;
+    })
+
 }
 
 module.exports.update = (req, res, next) => {
