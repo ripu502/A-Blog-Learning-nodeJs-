@@ -40,9 +40,11 @@ app.set('views', 'views');
 
 app.use(router);
 
-mongoose.connect(`mongodb+srv://${process.env.MongoUser}:${process.env.MongoPassword}@cluster0-jywn3.mongodb.net/${process.env.MongoDataBase}?retryWrites=true`, { useNewUrlParser: true, useUnifiedTopology: true }).then((result) => {
+mongoose.connect(`mongodb+srv://${process.env.MongoUser}:${process.env.MongoPassword}@cluster0-jywn3.mongodb.net/${process.env.MongoDataBase}?retryWrites=true`, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex:true}).then((result) => {
     console.log('connected');
-    app.listen(process.env.PORT || 3000);
+    app.listen(port, ()=>{
+        console.log(`server is running at http://localhost:${port}`)
+    });
 }).catch((err) => {
     console.log(err);
 });

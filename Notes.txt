@@ -1,7 +1,6 @@
-Read more in larger posts
+update delete only the valid user
 clear database
 flash messages
 unquie login
-update delete only the valid user
 Forgotten password
 search

@@ -149,12 +149,14 @@ module.exports.postingPost = (req, res, next) => {
     const heading = req.body.heading;
     const postContent = req.body.postContent;
     const publisherEmail = req.body.auther;
-    // console.log(req.body.auther);
+    let readmore = postContent.length > 300 ? 1 : 0;
+
     const post = new Post({
         name: name,
         heading: heading,
         postContent: postContent,
-        publisherEmail: publisherEmail
+        publisherEmail: publisherEmail,
+        readmore : readmore
     });
     post.save()
         .then(post => {
