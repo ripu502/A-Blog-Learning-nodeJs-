@@ -1,6 +1,3 @@
-update delete only the valid user
-clear database
-flash messages
-unquie login
 Forgotten password
+flash messages
 search

@@ -197,15 +197,20 @@ module.exports.update = (req, res, next) => {
     const updateId = req.params.updateId;
     Post.findById(updateId)
         .then(post => {
-            res.render('update', {
-                title: "Update",
-                name: post.name,
-                heading: post.heading,
-                postContent: post.postContent,
-                updateId: post._id,
-                login: req.user,
-
-            });
+            if(post.publisherEmail != req.user.email)
+            {
+                console.log('No autherised');
+                res.redirect('/MyPost');
+            }else{
+                res.render('update', {
+                    title: "Update",
+                    name: post.name,
+                    heading: post.heading,
+                    postContent: post.postContent,
+                    updateId: post._id,
+                    login: req.user,
+                });
+            }
         })
         .catch((err) => {
             console.log(err);
@@ -217,12 +222,18 @@ module.exports.postUpdate = (req, res, next) => {
     // res.send(req.body);
     Post.findById(req.body.updateId)
         .then(post => {
-            post.name = req.body.name;
-            post.heading = req.body.heading;
-            post.postContent = req.body.postContent;
-            post.save().then((done) => {
-                res.redirect('/');
-            });
+            if(post.publisherEmail != req.user.email)
+            {
+                console.log('No autherised');
+                res.redirect('/MyPost');
+            }else{
+                post.name = req.body.name;
+                post.heading = req.body.heading;
+                post.postContent = req.body.postContent;
+                post.save().then((done) => {
+                    res.redirect('/MyPost');
+                });
+            }
         })
         .catch(err => {
             console.log(err);
