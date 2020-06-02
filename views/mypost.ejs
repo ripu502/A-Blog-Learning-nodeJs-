@@ -1,0 +1,76 @@
+<%- include('include/head.ejs')%>
+<% if (details.length > 0) {%>
+<% for (let post of details) {%>
+<div class='container jumbotron'>
+
+    <h3><%=post.heading%></h3>
+    <br>
+    <% if(post.readmore == 0) {%>
+    <h5><%= post.postContent%></h5>
+    <%} else {%>
+    <h5><%= post.postContent.substring(0, 400)%>... </h5>
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target=".<%= post._id%>">Read
+        More</button>
+    <div class="modal fade <%= post._id%>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <p style="padding: 10px;">
+                    <%= post.postContent%>
+                </p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%}%>
+    <br>
+    <p>
+        <hr>
+        <h7> Written by <%= post.name%></h7> <br />
+    <h7> Email contact <%= post.publisherEmail%></h7>
+    <br>
+    <a href="/update<%=post._id%>" class="btn btn-outline-info">Update</a>
+    <a href="/delete<%=post._id%>" class="btn btn-outline-danger">Delete</a>
+    </p>
+
+</div>
+<br>
+
+<%}%> 
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <ul class="pagination pagination-sm">
+            <% if (currentPage !== 1) {%>
+<li class="page-item"><a class="page-link" href="/MyPost?page=1">First</a></li>
+<%}%>
+            <% if (hasPreviousPage && previous !== 1) {%>
+<li class="page-item"><a class="page-link" href="/MyPost?page=<%=previous%>">previous</a></li>
+<%}%>
+
+    <li class="page-item"><a class="page-link" href="/MyPost?page=<%=currentPage%>"
+style="background-color:#F3F4F8"><%= currentPage%></a></li>
+<% if (hasNextPage) {%>
+<li class="page-item"><a class="page-link" href="/MyPost?page=<%=next%>">next</a></li>
+<%}%>
+<% if (lastPage !== currentPage){%>
+<li class="page-item"><a class="page-link" href="/MyPost?page=<%= lastPage%>">Last</a></li>
+<%}%>
+</ul>
+</nav>
+
+<%} else {%>
+<div class='container'>
+    <h4>No Posts are Posted ...........
+        <br>
+        <br>
+        <a href="/addPost" class='btn btn-outline-primary'>Go add new post</a>
+    </h4>
+</div>
+<%}%>
+
+</body>
+<%- include('include/end.ejs')%>
